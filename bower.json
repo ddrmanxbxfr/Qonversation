@@ -17,8 +17,9 @@
     "tests"
   ],
   "dependencies": {
-    "angular-bootstrap": "~0.10.0",
-    "angular": "~1.2.14",
+    "angular-bootstrap": "*",
+    "angular": "*",
+    "angular-route": "*",
     "bootstrap": "*",
     "jquery": ">=1.9.0",
     "font-awesome": "*"
