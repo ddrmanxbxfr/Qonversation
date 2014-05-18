@@ -4,6 +4,7 @@
   , "private": true
   , "dependencies": {
       "faye": ">= 0.0.1",
-      "express": ">= 0.0.1"
+      "express": ">= 0.0.1",
+      "body-parser": ">= 0.0.1"
   }
 }
