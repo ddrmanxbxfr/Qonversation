@@ -1,0 +1,9 @@
+{
+    "name": "Qonversation"
+  , "version": "0.0.1"
+  , "private": true
+  , "dependencies": {
+      "faye": ">= 0.0.1",
+      "express": ">= 0.0.1"
+  }
+}
