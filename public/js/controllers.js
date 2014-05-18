@@ -2,13 +2,18 @@ var QonversationApp = angular.module('Qonversation',['ngRoute','ui.bootstrap']);
 
 // Page d'index
 QonversationApp.controller('QonversationCtrl', function ($scope) {
-  //$scope.username = $routeParams.username;
-
   // Include du menu
-  $scope.template = { name: 'menuLoggedIn.html', url: 'partials/menuLoggedIn.html'};
-});
+  $scope.templates = [{ name: 'login.html', url: 'partials/login.html'},
+                    { name: 'room.html', url: 'partials/room.html'}];
+  $scope.template = $scope.templates[0];
 
-// Controlleur pour le choix des rooms de groupe
-QonversationApp.controller('RoomCtrl', function ($location, $rootScope) {
-  $rootScope.username= 'Acceso';
+   $scope.login = function (username, password) {
+    if ( username === 'admin' && password === '1234') {
+        //authentication.isAuthenticated = true;
+        $scope.template = $scope.templates[1];
+        $scope.username = username;
+    } else {
+        $scope.loginError = "Invalid username/password combination";
+    };
+  };
 });

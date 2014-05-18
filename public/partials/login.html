@@ -1,16 +1,17 @@
 <div class="container">
   <!-- Main component for login -->
   <div class="jumbotron">
-    <h1>The Most Awesome chat app !</h1>
-    <h2>Please choose a nickname</h2>
-    <form>
+    <h1>Qonversation</h1>
+    <h2>The Most Awesome chat app !</h2>
+    <h3>Please choose a nickname</h3>
+    <form ng-submit="login(username, password)">
       <div class="input-group input-group-lg text-center">
-        <input type="text" class="form-control" placeholder="Username">
-        <input type="password" class="form-control" placeholder="Password">
+        <input type="text" class="form-control" ng-model="username" placeholder="Username">
+        <input type="password" class="form-control" ng-model="password" placeholder="Password">
       </div>
       <br />
       <p>
-        <a class="btn btn-lg btn-primary" href="#room" role="button">Let's chat !</a>
+        <button class="btn btn-lg btn-primary" ng-click="">Let's chat !</button>
       </p>
     </form>
   </div>
