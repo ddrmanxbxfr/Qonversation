@@ -6,7 +6,7 @@
     </div>
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li><a href="#" ng-bind-template="{{username}}"></a></li>
+        <li><a href="#" id='username' ng-bind-template="{{username}}"></a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#" ng-bind-template="{{online_status}}"></a></li>
@@ -24,11 +24,11 @@
     <h2>Now chatting in {{roomName}}</h2>
     <form role="form">
       <div class="form-group">
-        <textarea class="form-control"></textarea>
+        <textarea class="form-control" id='messages'></textarea>
       </div>
       <div class="form-inline">
         <input type='text'  class="form-control" placeholder="Type a message" id='message' />
-        <button class="btn btn-primary" id='fire'>Send</button>
+        <button class="btn btn-primary" id='fire'><i class="fa fa-paper-plane"></i> Send</button>
       </div>
     </div>
   </form>
