@@ -1,0 +1,25 @@
+{
+  "name": "Qonversation",
+  "version": "0.0.1",
+  "homepage": "",
+  "authors": [
+    "Mathieu Rhéaume <mathieu@codingrhemes.com>"
+  ],
+  "description": "Une application de chat qui est assez awesome !",
+  "main": "app.js",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-bootstrap": "~0.10.0",
+    "angular": "~1.2.14",
+    "bootstrap": "*",
+    "jquery": ">=1.9.0"
+  }
+}
