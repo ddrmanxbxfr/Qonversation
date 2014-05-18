@@ -7,3 +7,10 @@ QonversationApp.factory('authentication', function() {
     user: null
   }
 });
+
+
+QonversationApp.factory('chatrooms', function() {
+  return {
+    subscribed: []
+  }
+});

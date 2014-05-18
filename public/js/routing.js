@@ -10,4 +10,9 @@ function($routeProvider) {
     templateUrl: 'partials/room.html',
     controller: 'RoomCtrl'
   })
+  .
+  when('/chat', {
+    templateUrl: 'partials/chat.html',
+    controller: 'ChatCtrl'
+  })
 }]);

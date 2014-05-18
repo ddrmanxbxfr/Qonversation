@@ -15,12 +15,23 @@ QonversationApp.controller('QonversationCtrl', function ($scope, $http, $locatio
 });
 
 // Page de creation room
-QonversationApp.controller('RoomCtrl', function ($scope, $http, $location, authentication) {
-  $scope.username = authentication.user
+QonversationApp.controller('RoomCtrl', function ($scope, $http, $location, authentication, chatrooms) {
+  updateElementTopBar($scope,authentication);
   $scope.createRoom = function (roomName) {
-    console.log('yo from room page');
+    chatrooms.subscribed.push(roomName); // Ajout à la liste de groupes qu'on chat !
+    $location.path('/chat');
   };
-
-  //$scope.username = authentication.user;
-  //$scope.template = { name: 'room.html', url: 'partials/room.html'};
 });
+
+// Page de chat
+QonversationApp.controller('ChatCtrl', function ($scope, $http, $location, authentication) {
+  updateElementTopBar($scope,authentication);
+  console.log('yo from chat page !');
+});
+
+
+function updateElementTopBar($scope, authentication) {
+  // Element du top bar
+    $scope.username = authentication.user
+    $scope.online_status = "Status : Online"
+}
