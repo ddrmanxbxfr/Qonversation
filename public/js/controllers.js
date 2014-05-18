@@ -24,9 +24,9 @@ QonversationApp.controller('RoomCtrl', function ($scope, $http, $location, authe
 });
 
 // Page de chat
-QonversationApp.controller('ChatCtrl', function ($scope, $http, $location, authentication) {
+QonversationApp.controller('ChatCtrl', function ($scope, $http, $location, authentication, chatrooms) {
   updateElementTopBar($scope,authentication);
-  console.log('yo from chat page !');
+  $scope.roomName = chatrooms.subscribed[0];
 });
 
 
