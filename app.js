@@ -12,6 +12,7 @@ bayeux.attach(server);
 
 app.use(bodyParser());
 app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/components'));
 
 app.post('/message', function(req, res) {
   console.log('Got message from chat client!');
