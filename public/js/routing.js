@@ -5,7 +5,7 @@ function($routeProvider) {
     templateUrl: 'partials/login.html'
   }).
   when('/room', {
-    templateUrl: 'partials/room.html'
-  }
-)
+    templateUrl: 'partials/room.html',
+    controller: 'RoomCtrl'
+  })
 }]);

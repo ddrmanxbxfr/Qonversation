@@ -14,23 +14,8 @@
 <body ng-controller="QonversationCtrl">
 
 
-  <!-- Static navbar -->
-  <div class="navbar navbar-default navbar-static-top" role="navigation">
-    <div class="container">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="#">Qonversation</a>
-      </div>
-      <div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav">
-          <li><a href="#">{{username}}</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="#">{{online_status}}</a></li>
-        </ul>
-
-      </div><!--/.nav-collapse -->
-    </div>
-  </div>
+  <!-- The navbar -->
+  <ng-include src="template.url"></ng-include>
 
   <!-- Main view in center -->
   <div ng-view></div>
