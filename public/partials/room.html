@@ -22,13 +22,13 @@
   <!-- Main component for login -->
   <div class="jumbotron">
     <h2>Please choose a chatroom name</h2>
-    <form>
+    <form ng-submit="createRoom(roomName)">
       <div class="input-group input-group-lg text-center">
-        <input type="text" class="form-control" placeholder="Chatroom">
+        <input type="text" class="form-control" ng-model="roomName" placeholder="Chatroom">
       </div>
       <br />
       <p>
-        <a class="btn btn-lg btn-primary" href="#chat" role="button">OK !</a>
+        <button class="btn btn-lg btn-primary" ng-click="">OK !</button>
       </p>
     </form>
   </div>
