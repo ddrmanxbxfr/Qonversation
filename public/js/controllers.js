@@ -33,14 +33,14 @@ QonversationApp.controller('ChatCtrl', function ($scope, $http, $location, authe
   $scope.roomName = chatrooms.subscribed[0]; // Pour l'instant uniquement le premier chatroom
 
   $scope.sendMessage = function (messageToSend) {
-    console.log('Sending message ' + messageToSend);
-
+    	console.log('Sending message ' + messageToSend);
+	sendMessage(messageToSend);
 
   };
 });
 
 
-function sendMessage(message){
+function sendMessage($message){
 	var url = 'http://192.168.2.22:1337/message';
 	var message = {message: 'Angularjs : ' + $message};
         var dataType = 'json';
