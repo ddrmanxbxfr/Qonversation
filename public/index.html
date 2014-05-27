@@ -23,5 +23,10 @@
   <script src="js/routing.js"></script>
   <script src="js/controllers.js"></script>
   <script src='chat_server/client.js'></script>
+  <script> // Init the chat client !
+	var client = new Faye.Client('/chat_server',{
+                                timeout: 20
+                        });
+  </script>
 </body>
 </html>

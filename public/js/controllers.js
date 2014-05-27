@@ -19,6 +19,10 @@ QonversationApp.controller('RoomCtrl', function ($scope, $http, $location, authe
   updateElementTopBar($scope,authentication);
   $scope.createRoom = function (roomName) {
     chatrooms.subscribed.push(roomName); // Ajout à la liste de groupes qu'on chat !
+    var channelFaye = '/' + roomName;
+	client.subscribe(channelFaye, function(message) {
+                               console.log('Got message ' + message.text);
+    });
     $location.path('/chat');
   };
 });
@@ -26,12 +30,30 @@ QonversationApp.controller('RoomCtrl', function ($scope, $http, $location, authe
 // Page de chat
 QonversationApp.controller('ChatCtrl', function ($scope, $http, $location, authentication, chatrooms) {
   updateElementTopBar($scope,authentication);
-  $scope.roomName = chatrooms.subscribed[0];
+  $scope.roomName = chatrooms.subscribed[0]; // Pour l'instant uniquement le premier chatroom
+
+  $scope.sendMessage = function (messageToSend) {
+    console.log('Sending message ' + messageToSend);
+
+
+  };
 });
 
 
+function sendMessage(message){
+	var url = 'http://192.168.2.22:1337/message';
+	var message = {message: 'Angularjs : ' + $message};
+        var dataType = 'json';
+	$.ajax({
+		type: 'POST',
+                url: url,
+                data: message,
+                dataType: dataType,
+	});
+}
+
 function updateElementTopBar($scope, authentication) {
   // Element du top bar
-    $scope.username = authentication.user
-    $scope.online_status = "Status : Online"
+    $scope.username = authentication.user;
+    $scope.online_status = "Status : Online";
 }
