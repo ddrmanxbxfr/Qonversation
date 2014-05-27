@@ -9,9 +9,16 @@ QonversationApp.factory('authentication', function() {
 });
 
 
-QonversationApp.factory('chatrooms', function() {
+QonversationApp.factory('chatrooms', ['$rootScope', function($rootScope) {
+	var messages = [];
   return {
     subscribed: [],
-    messages: []
+    addMsg: function($messageToAdd) {
+	console.log('got msg!!');
+	$rootScope.$apply(function() {
+		messages.push($messageToAdd);
+	});
+	},
+   messages:messages
   }
-});
+}]);
