@@ -11,6 +11,7 @@ QonversationApp.factory('authentication', function() {
 
 QonversationApp.factory('chatrooms', function() {
   return {
-    subscribed: []
+    subscribed: [],
+    messages: []
   }
 });

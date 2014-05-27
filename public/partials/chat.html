@@ -22,7 +22,9 @@
   <!-- Main component for login -->
   <div class="jumbotron">
     <h2>Now chatting in {{roomName}}</h2>
-    <textarea class="form-control" id='messages'></textarea>
+    <ul>
+        <li ng-repeat="message in messages">{{message}}</li>
+    </ul>
     <form role="form" ng-submit="sendMessage(message)">
       <div class="form-inline">
         <input type='text'  class="form-control" placeholder="Type a message" ng-model="message" />
