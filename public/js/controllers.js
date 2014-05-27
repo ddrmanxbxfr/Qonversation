@@ -30,7 +30,10 @@ QonversationApp.controller('RoomCtrl', function ($scope, $http, $location, authe
 // Page de chat
 QonversationApp.controller('ChatCtrl', function ($scope, $http, $location, authentication, chatrooms) {
   updateElementTopBar($scope,authentication);
-  $scope.messages = chatrooms.messages;
+$scope.$watch( function () { return chatrooms.messages; }, function (data) {
+	$scope.messages = data;  
+}, true);
+
   $scope.roomName = chatrooms.subscribed[0]; // Pour l'instant uniquement le premier chatroom
   $scope.sendMessage = function (messageToSend) {
 	sendMessage(messageToSend);

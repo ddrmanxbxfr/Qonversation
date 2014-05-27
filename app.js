@@ -11,6 +11,15 @@ var server = http.createServer(app);
 bayeux.attach(server);
 
 app.use(bodyParser());
+
+// Setup CORS
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  next();
+});
+
+// Setup status routes
 app.use(express.static(__dirname + '/public'));
 app.use(express.static(__dirname + '/components'));
 

@@ -23,7 +23,7 @@
   <div class="jumbotron">
     <h2>Now chatting in {{roomName}}</h2>
     <ul>
-        <li ng-repeat="message in messages">{{message}}</li>
+        <li ng-repeat="message in messages track by $index">{{message}}</li>
     </ul>
     <form role="form" ng-submit="sendMessage(message)">
       <div class="form-inline">
