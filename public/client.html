@@ -19,7 +19,7 @@
 			    $nickname = $('#nickname');
 
 			$('#fire').on('click',null, function() {
-				var url = 'http://192.168.2.22:1337/message';
+				var url = 'http://127.0.0.1:1337/message';
 
 				var message = {message: $nickname.val() + ': ' + $chat.val()};
 				var dataType = 'json';

@@ -40,7 +40,7 @@ QonversationApp.controller('ChatCtrl', function ($scope, $http, $location, authe
 
 
 function sendMessage($message, $username){
-	var url = 'http://192.168.2.22:1337/message';
+	var url = 'http://127.0.0.1:1337/message';
 	var message = {message: $username + ' : ' + $message};
         var dataType = 'json';
 	$.ajax({
