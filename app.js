@@ -3,20 +3,23 @@ var http = require('http'),
     express = require('express'),
     bodyParser = require('body-parser');
 
-var bayeux = new faye.NodeAdapter({mount: '/chat_server'});
+var ps = new faye.NodeAdapter({
+    mount: '/ps'
+});
+
 var app = express();
 
 var server = http.createServer(app);
 
-bayeux.attach(server);
+ps.attach(server);
 
 app.use(bodyParser());
 
 // Setup CORS
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
- res.header("Access-Control-Allow-Headers", "X-Requested-With");
- next();
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    next();
 });
 
 // Setup status routes
@@ -24,9 +27,11 @@ app.use(express.static(__dirname + '/public'));
 app.use(express.static(__dirname + '/components'));
 
 app.post('/message', function(req, res) {
-  console.log('Got message from chat client!');
-  bayeux.getClient().publish('/channel', {text: req.body.message});
-  res.send(200);
+    console.log('Got message from chat client!');
+    ps.getClient().publish('/channel', {
+        text: req.body.message
+    });
+    res.send(200);
 });
 
 server.listen(1337);
