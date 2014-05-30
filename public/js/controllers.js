@@ -7,7 +7,7 @@ QonversationApp.controller('QonversationCtrl', function($scope, $http, $location
     if (username === 'admin' && password === '1234') {
       authentication.isAuthenticated = true;
       authentication.user = username;
-      $location.path('/room');
+      $location.path('/dash');
     } else {
       $scope.loginError = "Invalid username/password combination";
     };
