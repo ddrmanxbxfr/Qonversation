@@ -78,7 +78,7 @@ app.post('/message', function(req, res) {
     ps.getClient().publish('/channel', {
         text: req.body.message
     });
-    res.send(200); >>> >>> > Add basic channel creation capabalities
+    res.send(200);
 });
 
 server.listen(1337);
