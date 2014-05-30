@@ -21,7 +21,9 @@ QonversationApp.controller('RoomCtrl', function($scope, $http, $location, authen
     chatrooms.subscribed.push(roomName); // Ajout à la liste de groupes qu'on chat !
     var channelFaye = '/' + roomName;
     client.subscribe(channelFaye, function(message) {
-      chatrooms.addMsg(message.text);
+      var splt = message.text.split(":")
+      if (splt[0] != authentication.user) // 0 c'est  le username 1 message
+        chatrooms.addMsg(message.text);
     });
     $location.path('/chat');
   };
@@ -33,25 +35,18 @@ QonversationApp.controller('ChatCtrl', function($scope, $http, $location, authen
   $scope.messages = chatrooms.messages;
   $scope.roomName = chatrooms.subscribed[0]; // Pour l'instant uniquement le premier chatroom
   $scope.sendMessage = function(messageToSend) {
-    sendMessage(messageToSend, authentication.user);
-
+    sendMessage(messageToSend, authentication.user, chatrooms);
   };
 });
 
 
-function sendMessage($message, $username) {
+function sendMessage($message, $username, chatrooms) {
   var url = 'http://127.0.0.1:1337/message';
-
+  var msgToSend = $username + ':' + $message
   client.publish('/channel', {
-    text: $username + ' : ' + $message
+    text: msgToSend
   });
-  //  var dataType = 'json';
-  //  $.ajax({
-  //    type: 'POST',
-  //    url: url,
-  //    data: message,
-  //    dataType: dataType,
-  //  });
+  chatrooms.messages.push(msgToSend);
 }
 
 function updateElementTopBar($scope, authentication) {
