@@ -73,7 +73,6 @@ app.post('/channels', function(req, res) {
 
 });
 
-
 app.post('/message', function(req, res) {
     console.log('Got message from chat client!');
     ps.getClient().publish('/channel', {
