@@ -1,5 +1,5 @@
 'use strict';
-var QonversationApp = angular.module('Qonversation',['ngRoute','ui.bootstrap']);
+var QonversationApp = angular.module('Qonversation', ['ngRoute', 'ui.bootstrap']);
 
 QonversationApp.factory('authentication', function() {
   return {
@@ -9,16 +9,18 @@ QonversationApp.factory('authentication', function() {
 });
 
 
-QonversationApp.factory('chatrooms', ['$rootScope', function($rootScope) {
-	var messages = [];
-  return {
-    subscribed: [],
-    addMsg: function($messageToAdd) {
-	console.log('got msg!!');
-	$rootScope.$apply(function() {
-		messages.push($messageToAdd);
-	});
-	},
-   messages:messages
+QonversationApp.factory('chatrooms', ['$rootScope',
+  function($rootScope) {
+    var messages = [];
+    return {
+      subscribed: [],
+      addMsg: function($messageToAdd) {
+        console.log('got msg!!');
+        $rootScope.$apply(function() {
+          messages.push($messageToAdd);
+        });
+      },
+      messages: messages
+    }
   }
-}]);
+]);

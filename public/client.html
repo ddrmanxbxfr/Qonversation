@@ -1,13 +1,22 @@
 <html>
-	<body>
-		<head>
-			<script src=' https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
-			<style>
-				#messages { height: 300px; width: 300px; overflow: hidden; border: #ccc solid 1px;}
-				section { margin-left: 20px; }
-			</style>
-		</head>
-		<section>
+
+<body>
+
+	<head>
+		<script src=' https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
+		<style>
+			#messages {
+				height: 300px;
+				width: 300px;
+				overflow: hidden;
+				border: #ccc solid 1px;
+			}
+			section {
+				margin-left: 20px;
+			}
+		</style>
+	</head>
+	<section>
 		<h1>Chat Client</h1>
 		<div id="messages"></div>
 		<textarea rows="2" cols="35" id="chat"></textarea>
@@ -16,31 +25,32 @@
 		<script src='/chat_server/client.js'></script>
 		<script>
 			var $chat = $('#chat'),
-			    $nickname = $('#nickname');
+				$nickname = $('#nickname');
 
-			$('#fire').on('click',null, function() {
+			$('#fire').on('click', null, function() {
 				var url = 'http://127.0.0.1:1337/message';
 
-				var message = {message: $nickname.val() + ': ' + $chat.val()};
+				var message = {
+					message: $nickname.val() + ': ' + $chat.val()
+				};
 				var dataType = 'json';
 				$.ajax({
-				  type: 'POST',
-				  url: url,
-				  data: message,
-				  dataType: dataType,
+					type: 'POST',
+					url: url,
+					data: message,
+					dataType: dataType,
 				});
 				$chat.val('');
 			});
-			var client = new Faye.Client('/chat_server',{
+			var client = new Faye.Client('/chat_server', {
 				timeout: 20
 			});
 
 			client.subscribe('/channel', function(message) {
 				$('#messages').append('<p>' + message.text + '</p>');
 			});
-
-
 		</script>
-		</section>
-	</body>
+	</section>
+</body>
+
 </html>

@@ -6,13 +6,18 @@
     </div>
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li><a href="#" id='username' ng-bind-template="{{username}}"></a></li>
+        <li>
+          <a href="#" id='username' ng-bind-template="{{username}}"></a>
+        </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#" ng-bind-template="{{online_status}}"></a></li>
+        <li>
+          <a href="#" ng-bind-template="{{online_status}}"></a>
+        </li>
       </ul>
 
-    </div><!--/.nav-collapse -->
+    </div>
+    <!--/.nav-collapse -->
   </div>
 </div>
 
@@ -23,14 +28,15 @@
   <div class="jumbotron">
     <h2>Now chatting in {{roomName}}</h2>
     <ul>
-        <li ng-repeat="message in messages track by $index">{{message}}</li>
+      <li ng-repeat="message in messages track by $index">{{message}}</li>
     </ul>
     <form role="form" ng-submit="sendMessage(message)">
       <div class="form-inline">
-        <input type='text'  class="form-control" placeholder="Type a message" ng-model="message" />
+        <input type='text' class="form-control" placeholder="Type a message" ng-model="message" />
         <button class="btn btn-primary" ng-click=""><i class="fa fa-paper-plane"></i> Send</button>
       </div>
     </form>
 
   </div>
-</div> <!-- /container -->
+</div>
+<!-- /container -->
