@@ -1,0 +1,35 @@
+<!-- This top bar menu -->
+<div class="navbar navbar-default navbar-static-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Qonversation</a>
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+          <a href="#" ng-bind-template="{{username}}"></a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a href="#" ng-bind-template="{{online_status}}"></a>
+        </li>
+      </ul>
+
+    </div>
+    <!--/.nav-collapse -->
+  </div>
+</div>
+
+<div class="container" ng-controller="DashboardCtrl">
+  <!-- Main component for login -->
+  <div class="jumbotron">
+    <h1>Welcome</h1>
+    <h2>This is the worst welcome page in the world !</h2>
+    <h3>Please choose a room on top or type /room</h3>
+    <a href="/room">
+      <button class="btn btn-lg btn-primary">Let's chat !</button>
+    </a>
+  </div>
+</div>
+<!-- /container -->

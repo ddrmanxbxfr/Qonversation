@@ -15,5 +15,10 @@ QonversationApp.config(['$routeProvider',
       templateUrl: 'partials/chat.html',
       controller: 'ChatCtrl'
     })
+      .
+    when('/dash', {
+      templateUrl: 'partials/dashboard.html',
+      controller: 'DashboardCtrl'
+    })
   }
 ]);

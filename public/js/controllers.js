@@ -29,6 +29,11 @@ QonversationApp.controller('RoomCtrl', function($scope, $http, $location, authen
   };
 });
 
+// Page du dashboard
+QonversationApp.controller('DashboardCtrl', function($scope, $http, $location, authentication, chatrooms) {
+  updateElementTopBar($scope, authentication);
+});
+
 // Page de chat
 QonversationApp.controller('ChatCtrl', function($scope, $http, $location, authentication, chatrooms) {
   updateElementTopBar($scope, authentication);

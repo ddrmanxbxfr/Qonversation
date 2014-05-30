@@ -45,17 +45,17 @@ bayeux.on('subscribe', function(clientId, channel) {
 
 
 bayeux.on('publish', function(clientId, channel, data) {
-    // event listener logic
-    console.log('Client ' + clientId + ' talked in ' + channel + ' he said ' + data.text)
+  // event listener logic
+  console.log('Client ' + clientId + ' talked in ' + channel + ' he said ' + data.text)
+});
 
+app.post('/message', function(req, res) {
+  console.log('Got message from chat client!');
+  ps.getClient().publish('/channel', {
+    text: req.body.message
+  });
+  res.send(200);
+});
 
-    app.post('/message', function(req, res) {
-      console.log('Got message from chat client!');
-      ps.getClient().publish('/channel', {
-        text: req.body.message
-      });
-      res.send(200);
-    });
-
-    server.listen(1337);
-    console.log("server running at 1337");
+server.listen(1337);
+console.log("server running at 1337");
