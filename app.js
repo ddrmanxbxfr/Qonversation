@@ -43,15 +43,5 @@ bayeux.on('publish', function(clientId, channel, data) {
   console.log('Client ' + clientId + ' talked in ' + channel + ' he said ' + data.text)
 });
 
-
-
-app.post('/message', function(req, res) {
-  console.log('Got message from chat client!');
-  bayeux.getClient().publish('/channel', {
-    text: req.body.text
-  });
-  res.send(200);
-});
-
 server.listen(1337);
 console.log("server running at 1337");
