@@ -25,10 +25,30 @@ app.use(function(req, res, next) {
 app.use(express.static(__dirname + '/public'));
 app.use(express.static(__dirname + '/components'));
 
+
+//// Différentes methodes de monitoring API de bayeux
+bayeux.on('handshake', function(clientId) {
+  // event listener logic
+  console.log('Client connected Id : ' + clientId);
+});
+
+bayeux.on('subscribe', function(clientId, channel) {
+  // event listener logic
+  console.log('Client ' + clientId + ' subscribed to ' + channel)
+});
+
+
+bayeux.on('publish', function(clientId, channel, data) {
+  // event listener logic
+  console.log('Client ' + clientId + ' talked in ' + channel + ' he said ' + data.text)
+});
+
+
+
 app.post('/message', function(req, res) {
   console.log('Got message from chat client!');
   bayeux.getClient().publish('/channel', {
-    text: req.body.message
+    text: req.body.text
   });
   res.send(200);
 });

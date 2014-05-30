@@ -41,16 +41,17 @@ QonversationApp.controller('ChatCtrl', function($scope, $http, $location, authen
 
 function sendMessage($message, $username) {
   var url = 'http://127.0.0.1:1337/message';
-  var message = {
-    message: $username + ' : ' + $message
-  };
-  var dataType = 'json';
-  $.ajax({
-    type: 'POST',
-    url: url,
-    data: message,
-    dataType: dataType,
+
+  client.publish('/channel', {
+    text: $username + ' : ' + $message
   });
+  //  var dataType = 'json';
+  //  $.ajax({
+  //    type: 'POST',
+  //    url: url,
+  //    data: message,
+  //    dataType: dataType,
+  //  });
 }
 
 function updateElementTopBar($scope, authentication) {
