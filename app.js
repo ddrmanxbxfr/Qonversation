@@ -7,15 +7,11 @@ var bayeux = new faye.NodeAdapter({
   mount: '/chat_server'
 });
 
-var ps = new faye.NodeAdapter({
-  mount: '/ps'
-});
-
 var app = express();
 
 var server = http.createServer(app);
 
-ps.attach(server);
+bayeux.attach(server);
 
 app.use(bodyParser());
 
@@ -47,14 +43,6 @@ bayeux.on('subscribe', function(clientId, channel) {
 bayeux.on('publish', function(clientId, channel, data) {
   // event listener logic
   console.log('Client ' + clientId + ' talked in ' + channel + ' he said ' + data.text)
-});
-
-app.post('/message', function(req, res) {
-  console.log('Got message from chat client!');
-  ps.getClient().publish('/channel', {
-    text: req.body.message
-  });
-  res.send(200);
 });
 
 server.listen(1337);
