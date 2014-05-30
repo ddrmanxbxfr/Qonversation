@@ -48,7 +48,8 @@ QonversationApp.controller('ChatCtrl', function($scope, $http, $location, authen
 function sendMessage($message, $username, chatrooms) {
   var url = 'http://127.0.0.1:1337/message';
   var msgToSend = $username + ':' + $message
-  client.publish('/channel', {
+  var chName = '/' + chatrooms.subscribed[0];
+  client.publish(chName, {
     text: msgToSend
   });
   chatrooms.messages.push(msgToSend);
