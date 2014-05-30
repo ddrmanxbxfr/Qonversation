@@ -7,6 +7,7 @@ QonversationApp.controller('QonversationCtrl', function($scope, $http, $location
     if (username === 'admin' && password === '1234') {
       authentication.isAuthenticated = true;
       authentication.user = username;
+      authentication.status = "Online"
       $location.path('/dash');
     } else {
       $scope.loginError = "Invalid username/password combination";
@@ -32,6 +33,10 @@ QonversationApp.controller('RoomCtrl', function($scope, $http, $location, authen
 // Page du dashboard
 QonversationApp.controller('DashboardCtrl', function($scope, $http, $location, authentication, chatrooms) {
   updateElementTopBar($scope, authentication);
+  $scope.updStatus = function($status) {
+    authentication.status = $status
+    updateElementTopBar($scope, authentication);
+  }
 });
 
 // Page de chat
@@ -58,5 +63,5 @@ function sendMessage($message, $username, chatrooms) {
 function updateElementTopBar($scope, authentication) {
   // Element du top bar
   $scope.username = authentication.user;
-  $scope.online_status = "Status : Online";
+  $scope.online_status = authentication.status;
 }

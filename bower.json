@@ -21,6 +21,7 @@
     "angular": "*",
     "angular-route": "*",
     "bootstrap": "*",
+    "bootstrap-hover-dropdown": "*",
     "jquery": ">=1.9.0",
     "font-awesome": "*"
   }

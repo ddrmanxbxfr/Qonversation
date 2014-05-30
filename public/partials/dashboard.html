@@ -10,13 +10,32 @@
           <a href="#" ng-bind-template="{{username}}"></a>
         </li>
       </ul>
+
       <ul class="nav navbar-nav navbar-right">
-        <li>
+        <!--      <li>
           <a href="#" ng-bind-template="{{online_status}}"></a>
+        </li> -->
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="false" ng-bind-template="{{online_status}}">
+            <b class="caret"></b>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a tabindex="-1" href="/#/dash" ng-click="updStatus('Online')">Online</a>
+            </li>
+            <li><a tabindex="-1" href="/#/dash" ng-click="updStatus('Busy')">Busy</a>
+            </li>
+            <li><a tabindex="-1" href="/#/dash" ng-click="updStatus('Away')">Away</a>
+            </li>
+            <li class="divider"></li>
+            <li><a tabindex="-1" href="#">Logout</a>
+            </li>
+          </ul>
         </li>
       </ul>
-
     </div>
+
+
     <!--/.nav-collapse -->
   </div>
 </div>
