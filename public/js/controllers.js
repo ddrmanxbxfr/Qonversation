@@ -63,6 +63,12 @@ function updateElementTopBar($scope, authentication) {
   // Element du top bar
   $scope.username = authentication.user;
   $scope.online_status = authentication.status;
+
+  // Setup d'un mock room en attendant.
+  var roomMock= [];
+  roomMock.push("DummyRoom");
+  roomMock.push("12 12 NASA Rooms");
+  $scope.rooms = roomMock;
 }
 
 function updStatus($scope, authentication) {
