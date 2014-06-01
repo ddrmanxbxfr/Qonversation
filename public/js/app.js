@@ -15,6 +15,7 @@ QonversationApp.factory('chatrooms', ['$rootScope',
     var messages = [];
     return {
       subscribed: [],
+      // Fonction qui ajoute les message et trigger un digest cycle.
       addMsg: function($messageToAdd) {
         console.log('got msg!!');
         $rootScope.$apply(function() {

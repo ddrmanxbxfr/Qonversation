@@ -17,8 +17,8 @@ QonversationApp.controller('QonversationCtrl', function($scope, $http, $location
 
 // Page de creation room
 QonversationApp.controller('RoomCtrl', function($scope, $http, $location, authentication, chatrooms) {
-  updateElementTopBar($scope, authentication);
-  updStatus($scope, authentication);
+  updateElementTopBar($scope, authentication, chatrooms);
+  updStatus($scope, authentication, chatrooms);
   $scope.createRoom = function(roomName) {
     chatrooms.subscribed.push(roomName); // Ajout à la liste de groupes qu'on chat !
     var channelFaye = '/' + roomName;
@@ -33,14 +33,19 @@ QonversationApp.controller('RoomCtrl', function($scope, $http, $location, authen
 
 // Page du dashboard
 QonversationApp.controller('DashboardCtrl', function($scope, $http, $location, authentication, chatrooms) {
-  updateElementTopBar($scope, authentication);
-  updStatus($scope, authentication);
+  updateElementTopBar($scope, authentication, chatrooms);
+  updStatus($scope, authentication, chatrooms);
+
+  // Fonction pour rediriger vers une chatroom
+  $scope.goToChat = function ($roomName) {
+    $location.path('/chat');
+  }
 });
 
 // Page de chat
 QonversationApp.controller('ChatCtrl', function($scope, $http, $location, authentication, chatrooms) {
-  updateElementTopBar($scope, authentication);
-  updStatus($scope, authentication);
+  updateElementTopBar($scope, authentication, chatrooms);
+  updStatus($scope, authentication, chatrooms);
   $scope.messages = chatrooms.messages;
   $scope.roomName = chatrooms.subscribed[0]; // Pour l'instant uniquement le premier chatroom
   $scope.sendMessage = function(messageToSend) {
@@ -59,21 +64,18 @@ function sendMessage($message, $username, chatrooms) {
   chatrooms.messages.push(msgToSend);
 }
 
-function updateElementTopBar($scope, authentication) {
+function updateElementTopBar($scope, authentication, chatrooms) {
   // Element du top bar
   $scope.username = authentication.user;
   $scope.online_status = authentication.status;
 
-  // Setup d'un mock room en attendant.
-  var roomMock= [];
-  roomMock.push("DummyRoom");
-  roomMock.push("12 12 NASA Rooms");
-  $scope.rooms = roomMock;
+  // Setup des rooms qu'on à
+  $scope.rooms = chatrooms.subscribed; // On les à déjà les rooms.
 }
 
-function updStatus($scope, authentication) {
+function updStatus($scope, authentication, chatrooms) {
   $scope.updStatus = function($status) {
     authentication.status = $status
-    updateElementTopBar($scope, authentication);
+    updateElementTopBar($scope, authentication, chatrooms);
   }
 }
