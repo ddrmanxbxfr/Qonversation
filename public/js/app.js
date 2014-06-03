@@ -22,7 +22,8 @@ QonversationApp.factory('chatrooms', ['$rootScope',
           messages.push($messageToAdd);
         });
       },
-      messages: messages
+      messages: messages,
+      current_chatroom: ""
     }
   }
 ]);

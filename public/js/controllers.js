@@ -20,7 +20,10 @@ QonversationApp.controller('RoomCtrl', function($scope, $http, $location, authen
   updateElementTopBar($scope, authentication, chatrooms);
   updStatus($scope, authentication, chatrooms);
   $scope.createRoom = function(roomName) {
-    chatrooms.subscribed.push(roomName); // Ajout à la liste de groupes qu'on chat !
+    if (chatrooms.subscribed.indexOf(roomName) === -1) {
+      chatrooms.subscribed.push(roomName); // Ajout à la liste de groupes qu'on chat !
+    }
+    chatrooms.current_chatroom = roomName;
     var channelFaye = '/' + roomName;
     client.subscribe(channelFaye, function(message) {
       var splt = message.text.split(":")
@@ -35,19 +38,16 @@ QonversationApp.controller('RoomCtrl', function($scope, $http, $location, authen
 QonversationApp.controller('DashboardCtrl', function($scope, $http, $location, authentication, chatrooms) {
   updateElementTopBar($scope, authentication, chatrooms);
   updStatus($scope, authentication, chatrooms);
-
-  // Fonction pour rediriger vers une chatroom
-  $scope.goToChat = function ($roomName) {
-    $location.path('/chat');
-  }
 });
+
+
 
 // Page de chat
 QonversationApp.controller('ChatCtrl', function($scope, $http, $location, authentication, chatrooms) {
   updateElementTopBar($scope, authentication, chatrooms);
   updStatus($scope, authentication, chatrooms);
   $scope.messages = chatrooms.messages;
-  $scope.roomName = chatrooms.subscribed[0]; // Pour l'instant uniquement le premier chatroom
+  $scope.roomName = chatrooms.current_chatroom;
   $scope.sendMessage = function(messageToSend) {
     sendMessage(messageToSend, authentication.user, chatrooms);
   };
@@ -57,7 +57,7 @@ QonversationApp.controller('ChatCtrl', function($scope, $http, $location, authen
 function sendMessage($message, $username, chatrooms) {
   var url = 'http://127.0.0.1:1337/message';
   var msgToSend = $username + ':' + $message
-  var chName = '/' + chatrooms.subscribed[0];
+  var chName = '/' + chatrooms.current_chatroom;
   client.publish(chName, {
     text: msgToSend
   });
@@ -77,5 +77,12 @@ function updStatus($scope, authentication, chatrooms) {
   $scope.updStatus = function($status) {
     authentication.status = $status
     updateElementTopBar($scope, authentication, chatrooms);
+  }
+
+  // Fonction pour rediriger vers une chatroom
+  $scope.goToChat = function ($roomName) {
+    if (chatrooms.subscribed.indexOf($roomName) != -1) {
+      chatrooms.current_chatroom = $roomName;
+    }
   }
 }
