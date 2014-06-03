@@ -1,7 +1,11 @@
 var http = require('http'),
     faye = require('faye'),
     express = require('express'),
+    passport = require('passport'),
     bodyParser = require('body-parser');
+
+var nano = require('nano')('http://localhost:5984');
+var db = nano.use('qonversation_users');
 
 var ps = new faye.NodeAdapter({
     mount: '/chat_server'
@@ -70,7 +74,6 @@ app.post('/channels', function(req, res) {
             });
         }
     }
-
 });
 
 app.post('/message', function(req, res) {

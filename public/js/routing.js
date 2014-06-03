@@ -20,5 +20,10 @@ QonversationApp.config(['$routeProvider',
       templateUrl: 'partials/dashboard.html',
       controller: 'DashboardCtrl'
     })
+    .
+  when('/register', {
+    templateUrl: 'partials/register.html',
+    controller: 'RegisterCtrl'
+  })
   }
 ]);

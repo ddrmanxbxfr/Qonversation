@@ -13,6 +13,11 @@ QonversationApp.controller('QonversationCtrl', function($scope, $http, $location
       $scope.loginError = "Invalid username/password combination";
     };
   };
+
+  $scope.register = function() {
+    // Redirection vers la fameuse page de register...
+    $location.path('/register');
+  }
 });
 
 // Page de creation room
