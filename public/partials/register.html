@@ -1,1 +1,19 @@
-<p>This is a register page yolo</p>
+<div class="container" ng-controller="RegisterCtrl">
+  <!-- Main component for login -->
+  <div class="jumbotron">
+    <h1>Register to Qonversation</h1>
+    <h2>Enter your credientials</h2>
+    <form ng-submit="register(email, username, password)">
+      <div class="input-group input-group-lg text-center">
+        <input type="text" class="form-control" ng-model="email" placeholder="Email">
+        <input type="text" class="form-control" ng-model="username" placeholder="Username">
+        <input type="password" class="form-control" ng-model="password" placeholder="Password">
+      </div>
+      <br />
+      <p>
+        <button class="btn btn-lg btn-primary" ng-click="">Confirm your registration</button>
+      </p>
+    </form>
+  </div>
+</div>
+<!-- /container -->

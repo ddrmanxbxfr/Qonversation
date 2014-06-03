@@ -20,6 +20,14 @@ QonversationApp.controller('QonversationCtrl', function($scope, $http, $location
   }
 });
 
+// Page de register
+QonversationApp.controller('RegisterCtrl', function($scope, $http, $location, authentication) {
+  $scope.register = function(email, username, password) {
+    // Redirection vers la fameuse page de register...
+    $location.path('/register');
+  }
+});
+
 // Page de creation room
 QonversationApp.controller('RoomCtrl', function($scope, $http, $location, authentication, chatrooms) {
   updateElementTopBar($scope, authentication, chatrooms);
