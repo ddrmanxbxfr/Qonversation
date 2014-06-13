@@ -3,27 +3,39 @@ QonversationApp.config(['$routeProvider',
     $routeProvider.
     when('/', {
       templateUrl: 'partials/login.html',
-      controller: 'QonversationCtrl'
+      controller: 'QonversationCtrl',
+      title: 'Login'
     })
       .
     when('/room', {
       templateUrl: 'partials/room.html',
-      controller: 'RoomCtrl'
+      controller: 'RoomCtrl',
+      title: 'Room'
     })
       .
     when('/chat', {
       templateUrl: 'partials/chat.html',
-      controller: 'ChatCtrl'
+      controller: 'ChatCtrl',
+      title: 'Chat'
     })
       .
     when('/dash', {
       templateUrl: 'partials/dashboard.html',
-      controller: 'DashboardCtrl'
+      controller: 'DashboardCtrl',
+      title: 'Dashboard'
     })
     .
   when('/register', {
     templateUrl: 'partials/register.html',
-    controller: 'RegisterCtrl'
+    controller: 'RegisterCtrl',
+    title: 'Register'
   })
   }
 ]);
+
+QonversationApp.run(function($rootScope,$route) {
+  $rootScope.page_title = 'Qonversation';
+  $rootScope.$on('$routeChangeSuccess', function() {
+     $rootScope.page_title = $route.current.title;
+   });
+});
