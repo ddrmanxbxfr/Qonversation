@@ -5,7 +5,8 @@ var http = require('http'),
     bodyParser = require('body-parser');
 
 var nano = require('nano')('http://localhost:5984');
-var db = nano.use('qonversation_users');
+var dbPresistence = nano.use('qonversation_messages');
+var dbUsers = nano.use('qonversation_users');
 
 var ps = new faye.NodeAdapter({
     mount: '/chat_server'
@@ -43,8 +44,18 @@ ps.on('subscribe', function(clientId, channel) {
 
 
 ps.on('publish', function(clientId, channel, data) {
-    // event listener logic
-    console.log('Client ' + clientId + ' talked in ' + channel + ' he said ' + data.text)
+    var strSplit = data.text.split(":");
+    // Storing the message in the database
+    var doc = {
+    nickname: strSplit[0],
+    channel: channel,
+    message: strSplit[1]
+  };
+
+  dbPresistence.insert(doc, function(err, body) {
+  if (err) console.log(err);
+});
+
 });
 
 var channels = [];
