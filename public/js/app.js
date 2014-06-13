@@ -20,7 +20,8 @@ QonversationApp.factory('chatrooms', ['$rootScope',
       addMsg: function($messageToAdd) {
         $rootScope.$apply(function() {
           messages.push($messageToAdd);
-          current_messages.push($messageToAdd.text);
+          if ($messageToAdd.channel === current_chatroom)
+            current_messages.push($messageToAdd.text);
         });
       },
       getMessages: function($chatroomName) {

@@ -4,7 +4,7 @@ QonversationApp.controller('QonversationCtrl', function($scope, $http, $location
   //$scope.template = { name: 'login.html', url: 'partials/login.html'};
 
   $scope.login = function(username, password) {
-    if (username === 'admin' && password === '1234') {
+    if ((username === 'admin' && password === '1234') || (username === 'bob' && password === '1234')) {
       authentication.isAuthenticated = true;
       authentication.user = username;
       authentication.status = "Online"
