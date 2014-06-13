@@ -63,6 +63,7 @@ QonversationApp.controller('ChatCtrl', function($scope, $http, $location, authen
   $scope.roomName = chatrooms.current_chatroom;
   $scope.sendMessage = function(messageToSend) {
     sendMessage(messageToSend, authentication.user, chatrooms);
+    $scope.message = "";
   };
 });
 
