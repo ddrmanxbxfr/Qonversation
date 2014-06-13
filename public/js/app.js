@@ -16,11 +16,14 @@ QonversationApp.factory('chatrooms', ['$rootScope',
     var current_messages = [];
     return {
       subscribed: [],
+      current_chatroom: "",
+      messages: messages,
+      current_messages: current_messages,
       // Fonction qui ajoute les message et trigger un digest cycle.
-      addMsg: function($messageToAdd) {
+      addMsg: function($messageToAdd, $current_chatroom) {
         $rootScope.$apply(function() {
           messages.push($messageToAdd);
-          if ($messageToAdd.channel === current_chatroom)
+          if ($messageToAdd.channel === $current_chatroom)
             current_messages.push($messageToAdd.text);
         });
       },
@@ -31,10 +34,7 @@ QonversationApp.factory('chatrooms', ['$rootScope',
             current_messages.push(messages[iCpt].text);
           }
         }
-      },
-      messages: messages,
-      current_messages: current_messages,
-      current_chatroom: ""
+      }
     }
   }
 ]);

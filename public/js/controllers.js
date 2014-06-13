@@ -40,7 +40,7 @@ QonversationApp.controller('RoomCtrl', function($scope, $http, $location, authen
     var channelFaye = '/' + roomName;
     client.subscribe(channelFaye, function(message) {
       if (message.nickname != authentication.user) // 0 c'est  le username 1 message
-        chatrooms.addMsg(message);
+        chatrooms.addMsg(message,chatrooms.current_chatroom);
     });
     $location.path('/chat');
   };
