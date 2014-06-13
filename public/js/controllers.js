@@ -39,9 +39,8 @@ QonversationApp.controller('RoomCtrl', function($scope, $http, $location, authen
     chatrooms.current_chatroom = roomName;
     var channelFaye = '/' + roomName;
     client.subscribe(channelFaye, function(message) {
-
       if (message.nickname != authentication.user) // 0 c'est  le username 1 message
-        chatrooms.addMsg(message.text);
+        chatrooms.addMsg(message);
     });
     $location.path('/chat');
   };
@@ -59,7 +58,9 @@ QonversationApp.controller('DashboardCtrl', function($scope, $http, $location, a
 QonversationApp.controller('ChatCtrl', function($scope, $http, $location, authentication, chatrooms) {
   updateElementTopBar($scope, authentication, chatrooms);
   updStatus($scope, authentication, chatrooms);
-  $scope.messages = chatrooms.messages;
+  // Get the message for chatroom
+  chatrooms.getMessages(chatrooms.current_chatroom);
+  $scope.messages = chatrooms.current_messages;
   $scope.roomName = chatrooms.current_chatroom;
   $scope.sendMessage = function(messageToSend) {
     sendMessage(messageToSend, authentication.user, chatrooms);
@@ -72,13 +73,16 @@ function sendMessage($message, $username, chatrooms) {
   var url = 'http://127.0.0.1:1337/message';
   var msgToSend = $username + ':' + $message;
   var chName = '/' + chatrooms.current_chatroom;
-  client.publish(chName, {
+  var objMetadata = {
     nickname: $username,
     text: $message,
     channel: chatrooms.current_chatroom
-  });
+  };
 
-  chatrooms.messages.push(msgToSend);
+  client.publish(chName, objMetadata);
+
+  chatrooms.messages.push(objMetadata);
+  chatrooms.current_messages.push(objMetadata.text);
 }
 
 function updateElementTopBar($scope, authentication, chatrooms) {
