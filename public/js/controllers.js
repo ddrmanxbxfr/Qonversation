@@ -39,8 +39,8 @@ QonversationApp.controller('RoomCtrl', function($scope, $http, $location, authen
     chatrooms.current_chatroom = roomName;
     var channelFaye = '/' + roomName;
     client.subscribe(channelFaye, function(message) {
-      var splt = message.text.split(":")
-      if (splt[0] != authentication.user) // 0 c'est  le username 1 message
+  
+      if (message.nickname != authentication.user) // 0 c'est  le username 1 message
         chatrooms.addMsg(message.text);
     });
     $location.path('/chat');
@@ -70,11 +70,16 @@ QonversationApp.controller('ChatCtrl', function($scope, $http, $location, authen
 
 function sendMessage($message, $username, chatrooms) {
   var url = 'http://127.0.0.1:1337/message';
-  var msgToSend = $username + ':' + $message
-  var chName = '/' + chatrooms.current_chatroom;
+var msgToSend = $username + ':' + $message;
+var chName = '/' + chatrooms.current_chatroom;
   client.publish(chName, {
-    text: msgToSend
+    nickname:$username,
+    text: $message,
+    channel: chatrooms.current_chatroom
   });
+
+
+
   chatrooms.messages.push(msgToSend);
 }
 

@@ -44,12 +44,11 @@ ps.on('subscribe', function(clientId, channel) {
 
 
 ps.on('publish', function(clientId, channel, data) {
-    var strSplit = data.text.split(":");
     // Storing the message in the database
     var doc = {
-    nickname: strSplit[0],
+    nickname: data.nickname,
     channel: channel,
-    message: strSplit[1]
+    message: data.text
   };
 
   dbPresistence.insert(doc, function(err, body) {
